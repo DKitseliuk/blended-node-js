@@ -1,28 +1,28 @@
 import { Product } from '../models/product.js';
 
-const getAllProducts = async () => {
-  const products = await Product.find();
-  return products;
+const getAllProducts = (userId) => {
+  return Product.find({ userId });
 };
 
-const getProductById = async (productId) => {
-  return Product.findById(productId);
+const getProduct = (payload) => {
+  return Product.findOne(payload);
 };
 
-const createProduct = async (payload) => {
+const createProduct = (payload) => {
   return Product.create(payload);
 };
 
-const updateProduct = async (productId, payload) => {
-  return Product.findByIdAndUpdate(productId, payload, { new: true });
+const updateProduct = (data, payload) => {
+  return Product.findOneAndUpdate(data, payload, { new: true });
 };
-const deleteProduct = async (productId) => {
-  return Product.findByIdAndDelete(productId);
+
+const deleteProduct = (data) => {
+  return Product.findOneAndDelete(data);
 };
 
 export default {
   getAllProducts,
-  getProductById,
+  getProduct,
   createProduct,
   updateProduct,
   deleteProduct,
